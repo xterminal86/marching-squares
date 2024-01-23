@@ -282,7 +282,7 @@ def main():
   parser.add_argument("--scale",     help="Scale factor. Default: 3");
   parser.add_argument("--step",      help="Noise step. Default: 1.0");
   parser.add_argument("--threshold", help="Points threshold. Default: 0.5");
-  parser.add_argument("--period",    help="Noise period. Default: (screen.w * screen.h) // cellSize");
+  parser.add_argument("--period",    help="Noise period. Default: (window.w * window.h) // cellSize");
 
   args = parser.parse_args();
 
@@ -407,7 +407,11 @@ def main():
         if event.key == pygame.K_ESCAPE:
           running = False;
         elif event.key == pygame.K_SPACE:
-          grid   = CreateGrid(screenSize, cellSize, threshold, noiseStep, resolution);
+          grid   = CreateGrid(screenSize,
+                              cellSize,
+                              threshold,
+                              noiseStep,
+                              resolution);
           ppGrid = PostProcess(grid, dimX, dimY);
           currentGrid = grid if not ppFlag else ppGrid;
         elif event.key == pygame.K_LEFT:
