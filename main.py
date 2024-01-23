@@ -251,6 +251,19 @@ def IsBad(chunk : int) -> bool:
 
 ################################################################################
 
+def CountAround(grid, x, y) -> int:
+  pts = 0;
+
+  for i in range(-1, 2, 1):
+    for j in range(-1, 2, 1):
+      num = grid[x + i][y + j];
+      if num == 1:
+        pts += 1;
+
+  return pts;
+
+################################################################################
+
 def PostProcess(grid, dimX, dimY) -> list:
   offsets = [
     (-1, -1),
@@ -265,12 +278,23 @@ def PostProcess(grid, dimX, dimY) -> list:
 
   ppGrid = copy.deepcopy(grid);
 
+  # Remove single points
+
   for y in range(1, dimY - 2, 1):
     for x in range(1, dimX - 2, 1):
       chunk = ExtractChunk(ppGrid, x, y);
 
       if IsBad(chunk):
         ppGrid[x][y] = 0;
+
+  # Merge small chunks into bigger chunks
+
+  for y in range(1, dimY - 2, 1):
+    for x in range(1, dimX - 2, 1):
+      pts = CountAround(ppGrid, x, y);
+
+      if pts >= 5:
+        ppGrid[x][y] = 1;
 
   return ppGrid;
 
