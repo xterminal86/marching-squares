@@ -489,7 +489,7 @@ def main():
               f"threshold = { threshold }, "
               f"period = { resolution }, "
               f"tileset = { tilesetInd }, "
-              f"preprocessing = { ppFlag }"
+              f"postprocessing = { ppFlag }"
             ),
             (0, 0),
             fontColor);
@@ -520,7 +520,7 @@ def main():
 
       Print(screen,
             font,
-            "Press 'P' to toggle preprocess",
+            "Press 'P' to toggle postprocess",
             (screenSize[0] - 240, 128),
             fontColor);
 
